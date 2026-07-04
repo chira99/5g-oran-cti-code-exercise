@@ -43,18 +43,16 @@ Network flow → XGBoost classifier → CTI alert (JSON) → Qwen2.5-7B → Inci
 
 ### Running locally
 
+The notebook installs its own dependencies, so there is little to do by hand. Section 0 installs the Python packages (Unsloth first, then removes `torchao`, all before `torch` is imported), and Section 8.1 installs Ollama, starts the server, and pulls `qwen2.5:7b`. On a Linux machine with a CUDA GPU you only need Jupyter:
+
 ```bash
-pip install -r requirements.txt
-
-# Install and start Ollama
-curl -fsSL https://ollama.com/install.sh | sh
-ollama pull qwen2.5:7b
-
-# Launch notebook
+pip install -r requirements.txt   # sets up the environment; Section 0 installs the same packages
 jupyter notebook notebooks/5g_oran_cti_pipeline.ipynb
 ```
 
-Update `CSV_PATH` (and the other Drive paths) in the Setup cell to point to your local copies. Section 0 installs **all** Python dependencies up front — before `torch` is imported, and imports Unsloth first — then removes `torchao` (Unsloth uses bitsandbytes for 4-bit); Section 8 additionally installs the Ollama binary. A CUDA GPU is required for training, Ollama inference, and fine-tuning.
+In the Setup cell, point `CSV_PATH` and the output paths to your local copies and skip the Google Drive mount (Colab-only), then run all cells top to bottom.
+
+On macOS or Windows the in-notebook Ollama installer (the `curl … | sh` script plus the `apt-get` step) does not apply, so install Ollama from [ollama.com/download](https://ollama.com/download) first and let the notebook pull the model. A CUDA GPU is required for XGBoost training (`device='cuda'`), Unsloth fine-tuning, and Ollama inference.
 
 ## Dataset
 
@@ -91,6 +89,8 @@ Written to the configured output folder (`MyDrive/CTI/` on Colab):
 | `shap_per_class.png` | Per-class SHAP feature importance |
 | `qwen25_7b_cti_lora/` | Saved LoRA fine-tuned adapters |
 | `sample_incident_report.json` | Sample LLM-generated incident report (submission artifact) |
+
+**Note**: I have also included the `xgb_model.json` trained XGBoost model file and `qwen25_7b_cti_lora/` fine-tuned LoRA adapters in `app/data` folder. You may copy these into **your** CTI folder in Google Drive if ever required.
 
 ## Demo
 
