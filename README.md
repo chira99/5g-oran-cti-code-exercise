@@ -54,7 +54,7 @@ ollama pull qwen2.5:7b
 jupyter notebook notebooks/5g_oran_cti_pipeline.ipynb
 ```
 
-Update `CSV_PATH` (and the other Drive paths) in the Setup cell to point to your local copies. Sections 0, 4, 8 and 10 install their own dependencies in-notebook (torch, ollama, unsloth, trl, peft, accelerate, datasets); a CUDA GPU is required for training, Ollama inference, and fine-tuning.
+Update `CSV_PATH` (and the other Drive paths) in the Setup cell to point to your local copies. Section 0 installs **all** Python dependencies up front — before `torch` is imported, and imports Unsloth first — then removes `torchao` (Unsloth uses bitsandbytes for 4-bit); Section 8 additionally installs the Ollama binary. A CUDA GPU is required for training, Ollama inference, and fine-tuning.
 
 ## Dataset
 
