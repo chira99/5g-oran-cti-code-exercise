@@ -90,7 +90,7 @@ Written to the configured output folder (`MyDrive/CTI/` on Colab):
 | `qwen25_7b_cti_lora/` | Saved LoRA fine-tuned adapters |
 | `sample_incident_report.json` | Sample LLM-generated incident report (submission artifact) |
 
-**Note**: I have also included the `xgb_model.json` trained XGBoost model file and `qwen25_7b_cti_lora/` fine-tuned LoRA adapters in `app/data` folder. You may copy these into **your** CTI folder in Google Drive if ever required.
+**Note**: I have also included the `xgb_model.json` trained XGBoost model file in `app/data` folder. You may copy this into your CTI folder in Google Drive if ever required. `qwen25_7b_cti_lora/` is not included in this repo due to its large size. A zipped file of this folder can be obtained via: this [link](https://drive.google.com/file/d/1Js3urCGvXb6t_AqKv45OiSjrN-L8tMab/view?usp=sharing). Extract the folder and add to your `MyDrive/CTI/` folder in Google Drive.
 
 ## Demo
 
